@@ -1,18 +1,19 @@
 ##devz DEVeloper'S Stupid Servant
+##devz Bash extention usefull in the administration of multiple similar systems.
 ##devz g0 2010 - http://ipduh.com/contact
 
 DEVZ_VERBOSE="1"
-EGO="devz"
+DEVZ_EGO="devz"
 
-#do not replace with $0 since in run time devz is bash
-DEVZAT=/bin/${EGO}
+#Do not replace with $0, in runtime devz is bash
+DEVZAT=/bin/${DEVZ_EGO}
 
-IDENTITY="${HOME}/.ssh/id_dsa"
-PRO_SRV="${HOME}/.devzconfig/production-servers"
+DEVZ_IDENTITY="${HOME}/.ssh/id_dsa"
+DEVZ_PRO_SRV="${HOME}/.devzconfig/production-servers"
 
 function devz {
-  MEAT=${DEVZAT}
-  PT2="##"
+DEVZ_MEAT=${DEVZAT}
+DEVZ_PT2="##"
 
 if [ "${1}" = "toprod" ]
 then
@@ -26,6 +27,10 @@ elif [ "${1}" = "stor" ]
 then
   stor ${2}
 
+elif [ "${1}" = "ctoprod" ]
+then
+  ctoprod ${2}
+
 elif [ "${1}" = "setagent" ]
 then
   devz-setagent
@@ -37,39 +42,41 @@ then
 elif [ "${1}" = "setconfig" ]
 then
   devz-setconfig
+
 elif [ "${1}" = "prodsrvexists" ]
 then
- devz-prodsrvexists
+  devz-prodsrvexists
+
 else
   echo "******"
   echo "devz"
-  grep "${PT2}devz " ${MEAT} |awk -F "${PT2}devz " '{print $2}'
+  grep "${DEVZ_PT2}devz " ${DEVZ_MEAT} |awk -F "${DEVZ_PT2}devz " '{print $2}'
   echo "******"
   echo "devz verbs:"
   echo "*"
   echo "'toprod' or 'devz toprod'"
-  grep "${PT2}toprod" ${MEAT} |awk -F "${PT2}toprod" '{print $2}'
+  grep "${DEVZ_PT2}toprod" ${DEVZ_MEAT} |awk -F "${DEVZ_PT2}toprod" '{print $2}'
   echo "*"
   echo "'ctoprod' or 'devz ctoprod'"
-  grep "${PT2}ctoprod" ${MEAT} |awk -F "${PT2}ctoprod" '{print $2}'
+  grep "${DEVZ_PT2}ctoprod" ${DEVZ_MEAT} |awk -F "${DEVZ_PT2}ctoprod" '{print $2}'
   echo "*"
   echo "'fromprod' or 'devz fromprod'"
-  grep "${PT2}fromprod" ${MEAT} |awk -F "${PT2}fromprod" '{print $2}'
+  grep "${DEVZ_PT2}fromprod" ${DEVZ_MEAT} |awk -F "${DEVZ_PT2}fromprod" '{print $2}'
   echo "*"
   echo "'stor' or 'devz stor'"
-  grep "${PT2}stor" ${MEAT} |awk -F "${PT2}stor" '{print $2}'
+  grep "${DEVZ_PT2}stor" ${DEVZ_MEAT} |awk -F "${DEVZ_PT2}stor" '{print $2}'
   echo "*"
   echo "'devz-setagent' or 'devz setagent'"
-  grep "${PT2}devz-setagent" ${MEAT} |awk -F "${PT2}devz-setagent" '{print $2}'
+  grep "${DEVZ_PT2}devz-setagent" ${DEVZ_MEAT} |awk -F "${DEVZ_PT2}devz-setagent" '{print $2}'
   echo "*"
   echo "'devz-showconfig' or 'devz showconfig'"
-  grep "${PT2}devz-showconfig" ${MEAT} |awk -F "${PT2}devz-showconfig" '{print $2}'
+  grep "${DEVZ_PT2}devz-showconfig" ${DEVZ_MEAT} |awk -F "${DEVZ_PT2}devz-showconfig" '{print $2}'
   echo "*"
   echo "'devz-setconfig' or 'devz setconfig'"
-  grep "${PT2}devz-setconfig" ${MEAT} |awk -F "${PT2}devz-setconfig" '{print $2}'
+  grep "${DEVZ_PT2}devz-setconfig" ${DEVZ_MEAT} |awk -F "${DEVZ_PT2}devz-setconfig" '{print $2}'
   echo "*"
   echo "'devz-prodsrvexists' or 'devz prodsrvexists'"
-  grep "${PT2}devz-prodsrvexists" ${MEAT} |awk -F "${PT2}devz-prodsrvexists" '{print $2}'
+  grep "${DEVZ_PT2}devz-prodsrvexists" ${DEVZ_MEAT} |awk -F "${DEVZ_PT2}devz-prodsrvexists" '{print $2}'
   echo "*"
   echo "******"
 fi
@@ -77,39 +84,38 @@ fi
 
 ##
 ##devz-prodsrvexists prodsrvexists
-##devz-prodsrvexists check if ${PRO_SRV} exists and  print an example ${PRO_SRV} file
+##devz-prodsrvexists check if ${DEVZ_PRO_SRV} exists and  print an example ${DEVZ_PRO_SRV} file
 ##
 function devz-prodsrvexists {
-  if [ ! -e ${PRO_SRV} ]
+  if [ ! -e ${DEVZ_PRO_SRV} ]
     then
-      echo "${EGO}:I cannot read ${PRO_SRV}."
-      echo "${EGO}:Make sure that a readable ${PRO_SRV} exists."
+      echo "${DEVZ_EGO}:I cannot read ${DEVZ_PRO_SRV}."
+      echo "${DEVZ_EGO}:Make sure that a readable ${DEVZ_PRO_SRV} exists."
   fi
 
   echo ""
-  echo "#Example ${EGO} ${PRO_SRV} file."
+  echo "#Example ${DEVZ_EGO} ${DEVZ_PRO_SRV} file."
   echo "#IP or host name,SSH TCP Port,User"
   echo "192.0.2.222,22,devzuser"
   echo ""
 }
 ##
 ##devz-setconfig setconfig
-##devz-setconfig add to the production-servers list file
-##this is a silly function
-##devz-setconfig you better follow devz-howto for first setup
+##devz-setconfig add server to the production-servers list file
+##devz-setconfig setconfig cannot configure much, check the devz-howto for your first setup
 ##
 function devz-setconfig {
-if [ ! -e ${PRO_SRV} ]
+if [ ! -e ${DEVZ_PRO_SRV} ]
  then
    devz-prodsrvexists
 else
   DEVZ_SETCONFIG_PROSRV=""
-  ls -l ${PRO_SRV}*
+  ls -l ${DEVZ_PRO_SRV}*
   read -p "Set production-servers list: " DEVZ_SETCONFIG_PROSRV;
-  read -p "Add ${PROSRV} to ${PRO_SRV}? [y]:" DEVZ_YON;
+  read -p "Add ${PROSRV} to ${DEVZ_PRO_SRV}? [y]:" DEVZ_YON;
   if [ "$DEVZ_YON" == "y" ]
     then
-      echo "${DEVZ_SETCONFIG_PROSRV}" >> ${PRO_SRV}
+      echo "${DEVZ_SETCONFIG_PROSRV}" >> ${DEVZ_PRO_SRV}
   fi
   devz-showconfig
 fi
@@ -119,24 +125,24 @@ fi
 ##devz-showconfig See the Current devz configuration
 ##
 function devz-showconfig {
-  if [ ! -e ${PRO_SRV} ]
+  if [ ! -e ${DEVZ_PRO_SRV} ]
     then
       devz-prodsrvexists
     else
       echo "******"
-      echo "PRODUCTION SERVERS LIST from ${PRO_SRV}"
+      echo "PRODUCTION SERVERS LIST from ${DEVZ_PRO_SRV}"
       COUNTER=1
-      for SERVER in `grep -v -E '^#|^$' ${PRO_SRV}`
+      for DEVZ_SERVER in `grep -v -E '^#|^$' ${DEVZ_PRO_SRV}`
             do
-                    PRODUCTION_SRV=`echo ${SERVER} | awk -F "," '{print $1}'`
-                    PRODUCTION_SRV_PORT=`echo ${SERVER} | awk -F "," '{print $2}'`
-                    PRODUCTION_SRV_USER=`echo ${SERVER} | awk -F "," '{print $3}'`
+                    PRODUCTION_SRV=`echo ${DEVZ_SERVER} | awk -F "," '{print $1}'`
+                    PRODUCTION_SRV_PORT=`echo ${DEVZ_SERVER} | awk -F "," '{print $2}'`
+                    PRODUCTION_SRV_USER=`echo ${DEVZ_SERVER} | awk -F "," '{print $3}'`
                     echo "${COUNTER}) - $PRODUCTION_SRV -- $PRODUCTION_SRV_PORT -- $PRODUCTION_SRV_USER -"
         (( COUNTER += 1 ))
       done
     fi
       echo "***"
-      echo "IDENTITY: ${IDENTITY}"
+      echo "IDENTITY: ${DEVZ_IDENTITY}"
       echo "******"
 }
 ##
@@ -147,9 +153,9 @@ function devz-setagent {
   ssh-add -ls 2>/dev/null
   if [ $? -eq 0 ]
   then
-     echo "${EGO}:It seems that active identities are held by the ssh-agent"
+     echo "${DEVZ_EGO}:It seems that active identities are held by the ssh-agent."
   else
-     ssh-agent sh -c "ssh-add ${IDENTITY} && bash"
+     ssh-agent sh -c "ssh-add ${DEVZ_IDENTITY} && bash"
   fi
 }
 ##
@@ -157,27 +163,27 @@ function devz-setagent {
 ##toprod scp a file to the production server(s)
 ##
 function toprod {
-  PWD=`pwd`
+  DEVZ_PWD=`pwd`
 
 if [ -z "${1}" ]
 then
-      echo "${EGO}:toprod WHAT?"
-      echo "${EGO}:Type devz for help with all commands."
-elif [ ! -e ${PRO_SRV} ]
+      echo "${DEVZ_EGO}:toprod WHAT?"
+      echo "${DEVZ_EGO}:Type devz for help with all commands."
+elif [ ! -e ${DEVZ_PRO_SRV} ]
 then
-  echo "${EGO}:Make sure that a readable ${PRO_SRV} exists and contains at least one 'host,port,user' row"
-  echo "${EGO}:Type devz-prodsrvexists for an example  ${PRO_SRV} file."
+  echo "${DEVZ_EGO}:Make sure that a readable ${DEVZ_PRO_SRV} exists and contains at least one 'host,port,user' row"
+  echo "${DEVZ_EGO}:Type devz-prodsrvexists for an example  ${DEVZ_PRO_SRV} file."
 else
-  for SERVER in `grep -v -E '^#|^$' ${PRO_SRV}`
+  for DEVZ_SERVER in `grep -v -E '^#|^$' ${DEVZ_PRO_SRV}`
         do
-                PRODUCTION_SRV=`echo ${SERVER} | awk -F "," '{print $1}'`
-                PRODUCTION_SRV_PORT=`echo ${SERVER} | awk -F "," '{print $2}'`
-                PRODUCTION_SRV_USER=`echo ${SERVER} | awk -F "," '{print $3}'`
+                PRODUCTION_SRV=`echo ${DEVZ_SERVER} | awk -F "," '{print $1}'`
+                PRODUCTION_SRV_PORT=`echo ${DEVZ_SERVER} | awk -F "," '{print $2}'`
+                PRODUCTION_SRV_USER=`echo ${DEVZ_SERVER} | awk -F "," '{print $3}'`
     if [ ${DEVZ_VERBOSE} -eq 1 ]
     then
-      echo "${EGO}:${PWD}/${1} to $PRODUCTION_SRV_USER@$PRODUCTION_SRV:$PRODUCTION_SRV_PORT:${PWD}/${1}"
+      echo "${DEVZ_EGO}:${DEVZ_PWD}/${1} to $PRODUCTION_SRV_USER@$PRODUCTION_SRV:$PRODUCTION_SRV_PORT:${DEVZ_PWD}/${1}"
     fi
-    scp -r -P ${PRODUCTION_SRV_PORT} -i ${IDENTITY} $1 ${PRODUCTION_SRV_USER}@${PRODUCTION_SRV}:${PWD}/$1
+    scp -r -P ${PRODUCTION_SRV_PORT} -i ${DEVZ_IDENTITY} $1 ${PRODUCTION_SRV_USER}@${PRODUCTION_SRV}:${DEVZ_PWD}/$1
   done
 fi
 }
@@ -186,27 +192,29 @@ fi
 ##ctoprod send command(s) to poduction server(s)
 ##
 function ctoprod {
-        PWD=`pwd`
+        DEVZ_PWD=`pwd`
 
 if [ -z "${1}" ]
 then
-      echo "${EGO}:ctoprod WHAT?"
-      echo "${EGO}:Type devz for help with all commands."
-elif [ ! -e ${PRO_SRV} ]
+      echo "${DEVZ_EGO}:ctoprod WHAT?"
+      echo "${DEVZ_EGO}:Type devz for help with all commands."
+elif [ ! -e ${DEVZ_PRO_SRV} ]
 then
-  echo "${EGO}:Make sure that a readable ${PRO_SRV} exists and contains at least one 'host,port,user' row"
-  echo "${EGO}:Type devz-prodsrvexists for an example  ${PRO_SRV} file."
+  echo "${DEVZ_EGO}:Make sure that a readable ${DEVZ_PRO_SRV} exists and contains at least one 'host,port,user' row"
+  echo "${DEVZ_EGO}:Type devz-prodsrvexists for an example  ${DEVZ_PRO_SRV} file."
 else
-        for SERVER in `grep -v -E '^#|^$' ${PRO_SRV}`
+        for DEVZ_SERVER in `grep -v -E '^#|^$' ${DEVZ_PRO_SRV}`
         do
-                PRODUCTION_SRV=`echo ${SERVER} | awk -F "," '{print $1}'`
-                PRODUCTION_SRV_PORT=`echo ${SERVER} | awk -F "," '{print $2}'`
-                PRODUCTION_SRV_USER=`echo ${SERVER} | awk -F "," '{print $3}'`
+                PRODUCTION_SRV=`echo ${DEVZ_SERVER} | awk -F "," '{print $1}'`
+                PRODUCTION_SRV_PORT=`echo ${DEVZ_SERVER} | awk -F "," '{print $2}'`
+                PRODUCTION_SRV_USER=`echo ${DEVZ_SERVER} | awk -F "," '{print $3}'`
                 if [ ${DEVZ_VERBOSE} -eq 1 ]
                 then
-                        echo "${EGO}: ${PRODUCTION_SRV_USER}@${PRODUCTION_SRV}:${PRODUCTION_SRV_PORT} \"$1\""
+                        echo "${DEVZ_EGO}: ${PRODUCTION_SRV_USER}@${PRODUCTION_SRV}:${PRODUCTION_SRV_PORT} \"$1\""
                 fi
-                ssh -p ${PRODUCTION_SRV_PORT} -i ${IDENTITY} ${PRODUCTION_SRV_USER}@${PRODUCTION_SRV} ${1}
+                echo "***Start ${PRODUCTION_SRV}***"
+                ssh -p ${PRODUCTION_SRV_PORT} -i ${DEVZ_IDENTITY} ${PRODUCTION_SRV_USER}@${PRODUCTION_SRV} "cd ${DEVZ_PWD};${1}"
+                echo "***End ${PRODUCTION_SRV}***"
         done
 fi
 }
@@ -218,28 +226,28 @@ function fromprod {
 
 if [ -z "${1}" ]
 then
-      echo "${EGO}:fromprod WHAT?"
-      echo "${EGO}:Type devz for help with all commands."
-elif [ ! -e ${PRO_SRV} ]
+      echo "${DEVZ_EGO}:fromprod WHAT?"
+      echo "${DEVZ_EGO}:Type devz for help with all commands."
+elif [ ! -e ${DEVZ_PRO_SRV} ]
 then
-  echo "${EGO}:Make sure that a readable ${PRO_SRV} exists and contains at least one 'host,port,user' row"
-  echo "${EGO}:Type devz-prodsrvexists for an example  ${PRO_SRV} file."
+  echo "${DEVZ_EGO}:Make sure that a readable ${DEVZ_PRO_SRV} exists and contains at least one 'host,port,user' row"
+  echo "${DEVZ_EGO}:Type devz-prodsrvexists for an example  ${DEVZ_PRO_SRV} file."
 else
   if [ -e $1 ]
         then
-    echo "${EGO}:$1 exists! Please stor it and delete it or rename it or delete it."
+    echo "${DEVZ_EGO}:$1 exists! Please stor it and delete it or rename it or delete it."
         else
-    SERVER=`grep -v -E '^#|^$' -m 1 ${PRO_SRV}`
-    PRODUCTION_SRV=`echo ${SERVER} | awk -F "," '{print $1}'`
-                PRODUCTION_SRV_PORT=`echo ${SERVER} | awk -F "," '{print $2}'`
-                PRODUCTION_SRV_USER=`echo ${SERVER} | awk -F "," '{print $3}'`
+    DEVZ_SERVER=`grep -v -E '^#|^$' -m 1 ${DEVZ_PRO_SRV}`
+    PRODUCTION_SRV=`echo ${DEVZ_SERVER} | awk -F "," '{print $1}'`
+                PRODUCTION_SRV_PORT=`echo ${DEVZ_SERVER} | awk -F "," '{print $2}'`
+                PRODUCTION_SRV_USER=`echo ${DEVZ_SERVER} | awk -F "," '{print $3}'`
 
     if [ ${DEVZ_VERBOSE} -eq 1 ]
                 then
-                        echo "${EGO}:$PRODUCTION_SRV_USER@$PRODUCTION_SRV:$PRODUCTION_SRV_PORT:${PWD}/${1} to ${PWD}/${1}"
+                        echo "${DEVZ_EGO}:$PRODUCTION_SRV_USER@$PRODUCTION_SRV:$PRODUCTION_SRV_PORT:${DEVZ_PWD}/${1} to ${DEVZ_PWD}/${1}"
                 fi
 
-    scp -r -P ${PRODUCTION_SRV_PORT} -i ${IDENTITY} ${PRODUCTION_SRV_USER}@${PRODUCTION_SRV}:${PWD}/$1 .
+    scp -r -P ${PRODUCTION_SRV_PORT} -i ${DEVZ_IDENTITY} ${PRODUCTION_SRV_USER}@${PRODUCTION_SRV}:${DEVZ_PWD}/$1 .
   fi
 fi
 }
@@ -253,14 +261,14 @@ function stor {
 
 if [ -z "${1}" ]
 then
-  echo "${EGO}:stor WHAT?"
-        echo "${EGO}:Type devz for help with all commands."
+  echo "${DEVZ_EGO}:stor WHAT?"
+        echo "${DEVZ_EGO}:Type devz for help with all commands."
 else
 
 
   if [ ! -d ./stor ]
   then
-    echo "${EGO}:The directory ./stor does not exist! I will create it."
+    echo "${DEVZ_EGO}:The directory ./stor does not exist! I will create it."
     mkdir ./stor
   fi
 
@@ -278,32 +286,32 @@ else
     done
 
     declare -a FILEVL=( ${FILEV} )
-    LAST=0
+    DEVZ_LAST=0
 
     for j in $(seq 0 $((${#FILEVL[@]} -1)))
     do
-            if [ ${LAST} -lt ${FILEVL[$j]} ]
+            if [ ${DEVZ_LAST} -lt ${FILEVL[$j]} ]
             then
-                    LAST=${FILEVL[$j]}
+                    DEVZ_LAST=${FILEVL[$j]}
             fi
     done
 
-          diff ${1} ./stor/${1}.${LAST} > /dev/null
+          diff ${1} ./stor/${1}.${DEVZ_LAST} > /dev/null
     if [ $? -eq 0 ]
     then
-      echo "${EGO}:${1} is the same as ./stor/${1}.${LAST}"
-      echo "${EGO}:I did not stor ${1}"
+      echo "${DEVZ_EGO}:${1} is the same as ./stor/${1}.${DEVZ_LAST}"
+      echo "${DEVZ_EGO}:I did not stor ${1}"
     else
-      LAST=`expr ${LAST} + 1`
-      cp $1 ./stor/$1.${LAST}
-      echo "${EGO}:${1} is at ./stor/${1}.${LAST}"
+      DEVZ_LAST=`expr ${DEVZ_LAST} + 1`
+      cp $1 ./stor/$1.${DEVZ_LAST}
+      echo "${DEVZ_EGO}:${1} is at ./stor/${1}.${DEVZ_LAST}"
     fi
         fi
 
   if [ ! -e ./stor/$1.0 -a -d ./stor ]
   then
     cp $1 ./stor/$1.0
-    echo "${EGO}:$1 is at ./stor/$1.0"
+    echo "${DEVZ_EGO}:$1 is at ./stor/$1.0"
   fi
 fi
 }

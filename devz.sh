@@ -1,7 +1,7 @@
 ##devz DEVeloper'S Stupid Servant
 ##devz g0 2010 - http://ipduh.com/contact
 
-VERBOSE="1"
+DEVZ_VERBOSE="1"
 EGO="devz"
 
 #do not replace with $0 since in run time devz is bash
@@ -173,7 +173,7 @@ else
                 PRODUCTION_SRV=`echo ${SERVER} | awk -F "," '{print $1}'`
                 PRODUCTION_SRV_PORT=`echo ${SERVER} | awk -F "," '{print $2}'`
                 PRODUCTION_SRV_USER=`echo ${SERVER} | awk -F "," '{print $3}'`
-    if [ ${VERBOSE} -eq 1 ]
+    if [ ${DEVZ_VERBOSE} -eq 1 ]
     then
       echo "${EGO}:${PWD}/${1} to $PRODUCTION_SRV_USER@$PRODUCTION_SRV:$PRODUCTION_SRV_PORT:${PWD}/${1}"
     fi
@@ -202,7 +202,7 @@ else
                 PRODUCTION_SRV=`echo ${SERVER} | awk -F "," '{print $1}'`
                 PRODUCTION_SRV_PORT=`echo ${SERVER} | awk -F "," '{print $2}'`
                 PRODUCTION_SRV_USER=`echo ${SERVER} | awk -F "," '{print $3}'`
-                if [ ${VERBOSE} -eq 1 ]
+                if [ ${DEVZ_VERBOSE} -eq 1 ]
                 then
                         echo "${EGO}: ${PRODUCTION_SRV_USER}@${PRODUCTION_SRV}:${PRODUCTION_SRV_PORT} \"$1\""
                 fi
@@ -234,7 +234,7 @@ else
                 PRODUCTION_SRV_PORT=`echo ${SERVER} | awk -F "," '{print $2}'`
                 PRODUCTION_SRV_USER=`echo ${SERVER} | awk -F "," '{print $3}'`
 
-    if [ ${VERBOSE} -eq 1 ]
+    if [ ${DEVZ_VERBOSE} -eq 1 ]
                 then
                         echo "${EGO}:$PRODUCTION_SRV_USER@$PRODUCTION_SRV:$PRODUCTION_SRV_PORT:${PWD}/${1} to ${PWD}/${1}"
                 fi

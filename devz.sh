@@ -183,7 +183,7 @@ fi
 }
 ##
 ##ctoprod ctoprod 'command;command;'
-##ctoprod send command(s) poduction server(s)
+##ctoprod send command(s) to poduction server(s)
 ##
 function ctoprod {
         PWD=`pwd`

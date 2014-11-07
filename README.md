@@ -1,8 +1,6 @@
 devz
 ====
 <pre>
-******
-devz
 DEVeloper'S Stupid Servant.
 A bash extention that helps the administrator of similar dev and production systems.
 g0 2010 - http://ipduh.com/contact <br />

@@ -2,6 +2,7 @@
 # Install devz as root or sudoer
 # g0 2013 - http://ipduh.com/contact
 # http://sl.ipduh.com/devz-howto
+
 source ./devz.sh
 cp ./devz.sh /bin/devz
 

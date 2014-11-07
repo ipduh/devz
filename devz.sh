@@ -1,15 +1,20 @@
-##devz DEVeloper'S Stupid Servant
-##devz Bash extention usefull in the administration of multiple similar systems.
+##devz DEVeloper'S Stupid Servant.
+##devz A bash extention usefull in the administration of many similar dev and production systems.
 ##devz g0 2010 - http://ipduh.com/contact
 
 DEVZ_VERBOSE="1"
 DEVZ_EGO="devz"
-
-#Do not replace with $0, in runtime devz is bash
 DEVZAT=/bin/${DEVZ_EGO}
-
+DEVZ_CONFIGDIR="${HOME}/.devzconfig"
 DEVZ_IDENTITY="${HOME}/.ssh/id_dsa"
-DEVZ_PRO_SRV="${HOME}/.devzconfig/production-servers"
+DEVZ_PRO_SRV="${DEVZ_CONFIGDIR}/production-servers"
+DEVZ_OVERWRITE="${DEVZ_CONFIGDIR}/devz_vars"
+
+
+if [ -e $DEVZ_OVERWRITE ]
+then
+  source $DEVZ_OVERWRITE
+fi
 
 function devz {
 DEVZ_MEAT=${DEVZAT}

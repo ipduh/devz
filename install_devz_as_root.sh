@@ -1,11 +1,11 @@
 #!/bin/bash
 # Install devz as root or sudoer
-# g0 2013 - http://ipduh.com/contact 
-
+# g0 2013 - http://ipduh.com/contact
+# http://sl.ipduh.com/devz-howto
 source ./devz.sh
-cp ./devz.sh /bin/devz 
+cp ./devz.sh /bin/devz
 
-if [ ! -d $DEVZ_CONFIGDIR ] 
+if [ ! -d $DEVZ_CONFIGDIR ]
 then
   mkdir $DEVZ_CONFIGDIR
 fi
@@ -20,6 +20,6 @@ grep "source /bin/devz" ${HOME}/.bashrc &> /dev/null
 if [ ! $? -eq 0 ]
 then
   echo "source /bin/devz" >>  ${HOME}/.bashrc
-fi 
+fi
 
 source ${HOME}/.bashrc

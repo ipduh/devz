@@ -1,6 +1,7 @@
 ##devz DEVeloper'S Stupid Servant.
 ##devz A bash extention that helps the administrator of similar dev and production systems.
 ##devz g0 2010 - http://ipduh.com/contact
+##devz http://sl.ipduh.com/devz-howto
 
 DEVZ_VERBOSE="1"
 DEVZ_EGO="devz"

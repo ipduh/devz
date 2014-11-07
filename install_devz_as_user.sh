@@ -1,10 +1,10 @@
 #!/bin/bash
 # Install devz as user
-# g0 2013 - http://ipduh.com/contact 
-
+# g0 2013 - http://ipduh.com/contact
+# http://sl.ipduh.com/devz-howto
 source ./devz.sh
 
-if [ ! -d $DEVZ_CONFIGDIR ] 
+if [ ! -d $DEVZ_CONFIGDIR ]
 then
   mkdir $DEVZ_CONFIGDIR
 fi
@@ -16,7 +16,7 @@ then
   echo "DEVZAT=${DEVZ_CONFIGDIR}/devz" > ${DEVZ_OVERWRITE}
   grep "source ${DEVZ_CONFIGDIR}/devz" ${HOME}/.bashrc
   if [ ! $? -eq 0 ]
-  then 
+  then
     echo "source ${DEVZ_CONFIGDIR}/devz" >> ${HOME}/.bashrc
   fi
 else

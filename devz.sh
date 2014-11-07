@@ -243,7 +243,7 @@ then
 else
   if [ -e $1 ]
         then
-    echo "${DEVZ_EGO}:$1 exists! Please stor it and delete it or rename it or delete it."
+    echo "${DEVZ_EGO}:$1 exists! Please stor it and delete it or rename it."
         else
     DEVZ_SERVER=`grep -v -E '^#|^$' -m 1 ${DEVZ_PRO_SRV}`
     PRODUCTION_SRV=`echo ${DEVZ_SERVER} | awk -F "," '{print $1}'`

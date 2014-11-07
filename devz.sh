@@ -1,5 +1,5 @@
 ##devz DEVeloper'S Stupid Servant.
-##devz A bash extention usefull in the administration of many similar dev and production systems.
+##devz A bash extention that helps the administrator of similar dev and production systems.
 ##devz g0 2010 - http://ipduh.com/contact
 
 DEVZ_VERBOSE="1"
@@ -92,11 +92,13 @@ fi
 ##devz-prodsrvexists check if ${DEVZ_PRO_SRV} exists and  print an example ${DEVZ_PRO_SRV} file
 ##
 function devz-prodsrvexists {
-  if [ ! -e ${DEVZ_PRO_SRV} ]
-    then
-      echo "${DEVZ_EGO}:I cannot read ${DEVZ_PRO_SRV}."
-      echo "${DEVZ_EGO}:Make sure that a readable ${DEVZ_PRO_SRV} exists."
-  fi
+if [ ! -e ${DEVZ_PRO_SRV} ]
+then
+  echo "${DEVZ_EGO}:I cannot read ${DEVZ_PRO_SRV}."
+  echo "${DEVZ_EGO}:Make sure that a readable ${DEVZ_PRO_SRV} exists."
+else
+  echo "${DEVZ_EGO}:${DEVZ_PRO_SRV} exists. Try devz-showconfig to read it with devz."
+fi
 
   echo ""
   echo "#Example ${DEVZ_EGO} ${DEVZ_PRO_SRV} file."

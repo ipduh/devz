@@ -1,6 +1,6 @@
 devz
 ====
-
+<pre>
 ******
 devz
 DEVeloper'S Stupid Servant.
@@ -46,4 +46,4 @@ devz verbs:
  check if ${DEVZ_PRO_SRV} exists and  print an example ${DEVZ_PRO_SRV} file
 *
 ******
-
+</pre>

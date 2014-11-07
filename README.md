@@ -6,7 +6,7 @@ devz
 DEVeloper'S Stupid Servant.
 A bash extention that helps the administrator of similar dev and production systems.
 </pre>
-g0 2010 - http://ipduh.com/contact
+g0 2010 - http://ipduh.com/contact <br />
 http://sl.ipduh.com/devz-howto
 <pre>
 ******

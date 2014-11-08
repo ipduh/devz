@@ -4,4 +4,4 @@
 # http://sl.ipduh.com/devz-howto
 
 . ./devz.sh
-devz |awk 1 ORS='<br />\n'|sed 's/*/ /g' > ./README.md
+devz |awk 1 ORS='<br />\n'|sed 's/devz<br \/>/devz/g'|sed 's/=<br \/>/ /g' |sed 's/*/ /g' > ./README.md

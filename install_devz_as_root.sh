@@ -23,4 +23,9 @@ then
   echo "source /bin/devz" >>  ${HOME}/.bashrc
 fi
 
-source ${HOME}/.bashrc
+grep -E "source ~/.bashrc|. ~/.bashrc|. ${HOME}/.bashrc" ${HOME}/.bash_profile &> /dev/null
+if [ ! $? -eq 0 ]
+then
+  echo "source ${HOME}/.bashrc" >>  ${HOME}/.bash_profile
+fi
+

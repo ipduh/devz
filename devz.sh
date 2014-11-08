@@ -54,10 +54,10 @@ then
   devz-prodsrvexists
 
 else
-  echo "******"
   echo "devz"
+  echo "===="
   grep "${DEVZ_PT2}devz " ${DEVZ_MEAT} |awk -F "${DEVZ_PT2}devz " '{print $2}'
-  echo "******"
+  echo "****"
   echo "devz verbs:"
   echo "*"
   echo "'toprod' or 'devz toprod'"
@@ -84,7 +84,7 @@ else
   echo "'devz-prodsrvexists' or 'devz prodsrvexists'"
   grep "${DEVZ_PT2}devz-prodsrvexists" ${DEVZ_MEAT} |awk -F "${DEVZ_PT2}devz-prodsrvexists" '{print $2}'
   echo "*"
-  echo "******"
+  echo "****"
 fi
 }
 

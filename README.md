@@ -1,10 +1,10 @@
-devz<br />
-====<br />
+devz
+==== 
 DEVeloper'S Stupid Servant.<br />
 A bash extention that helps the administrator of similar dev and production systems.<br />
 g0 2010 - http://ipduh.com/contact<br />
 http://sl.ipduh.com/devz-howto<br />
-    <br />
+     <br />
 devz verbs:<br />
  <br />
 'toprod' or 'devz toprod'<br />
@@ -42,4 +42,4 @@ devz verbs:<br />
  prodsrvexists<br />
  check if ${DEVZ_PRO_SRV} exists and  print an example ${DEVZ_PRO_SRV} file<br />
  <br />
-    <br />
+     <br />

@@ -34,4 +34,3 @@ then
   echo "#192.0.2.222,22,root" >> $DEVZ_PRO_SRV
 fi
 
-source ${HOME}/.bashrc

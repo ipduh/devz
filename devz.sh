@@ -171,7 +171,8 @@ function devz-setagent {
 ##toprod scp a file to the production server(s)
 ##
 function toprod {
-  DEVZ_PWD=`pwd`
+
+DEVZ_PWD=`pwd`
 
 if [ -z "${1}" ]
 then
@@ -200,7 +201,8 @@ fi
 ##ctoprod send command(s) to poduction server(s)
 ##
 function ctoprod {
-        DEVZ_PWD=`pwd`
+
+DEVZ_PWD=`pwd`
 
 if [ -z "${1}" ]
 then
@@ -231,6 +233,8 @@ fi
 ##fromprod scp a file from the first production server here.
 ##
 function fromprod {
+
+DEVZ_PWD=`pwd`
 
 if [ -z "${1}" ]
 then

@@ -42,4 +42,8 @@ devz verbs:<br />
  prodsrvexists<br />
  check if ${DEVZ_PRO_SRV} exists and  print an example ${DEVZ_PRO_SRV} file<br />
  <br />
+'rmstorfromgit' or 'devz rmstorfromgit'<br />
+ rmstorfromgit<br />
+ remove the devs stor directories from git only<br />
+ <br />
      <br />

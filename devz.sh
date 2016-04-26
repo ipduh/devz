@@ -53,6 +53,10 @@ elif [ "${1}" = "prodsrvexists" ]
 then
   devz-prodsrvexists
 
+elif [ "${1}" = "rmstorfromgit" ]
+then
+  rmstorfromgit
+
 else
   echo "devz"
   echo "====="
@@ -83,6 +87,9 @@ else
   echo "*"
   echo "'devz-prodsrvexists' or 'devz prodsrvexists'"
   grep "${DEVZ_PT2}devz-prodsrvexists" ${DEVZ_MEAT} |awk -F "${DEVZ_PT2}devz-prodsrvexists" '{print $2}'
+  echo "*"
+  echo "'rmstorfromgit' or 'devz rmstorfromgit'"
+  grep "${DEVZ_PT2}rmstorfromgit" ${DEVZ_MEAT} |awk -F "${DEVZ_PT2}rmstorfromgit" '{print $2}'
   echo "*"
   echo "*****"
 fi
@@ -328,3 +335,13 @@ else
 fi
 }
 
+##
+##rmstorfromgit rmstorfromgit
+##rmstorfromgit remove the devs stor directories from git only
+##
+function rmstorfromgit {
+
+git rm -r --cached stor
+for i in `git ls-files |grep stor\/`;do git rm --cached $i;done
+
+}

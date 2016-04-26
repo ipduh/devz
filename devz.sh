@@ -337,7 +337,7 @@ fi
 
 ##
 ##rmstorfromgit rmstorfromgit
-##rmstorfromgit remove the devs stor directories from git only
+##rmstorfromgit remove the devz stor directories from git only
 ##
 function rmstorfromgit {
 

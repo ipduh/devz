@@ -44,6 +44,6 @@ devz verbs:<br />
  <br />
 'rmstorfromgit' or 'devz rmstorfromgit'<br />
  rmstorfromgit<br />
- remove the devs stor directories from git only<br />
+ remove the devz stor directories from git only<br />
  <br />
      <br />
